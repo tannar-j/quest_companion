@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       title: 'Quest Companion',
       theme: ThemeData(
         fontFamily: 'Ringbearer',
-        primarySwatch: Colors.blueGrey,
+        primarySwatch: Colors.grey,
       ),
       home: const DefaultTabController(
           length: 3,
@@ -145,6 +145,32 @@ class _MyHomePageState extends State<MyHomePage> {
                         ],
                       ),
                     ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Card(
+                            child: Column(
+                              children: const [
+                                SizedBox(
+                                  height: 200,
+                                    child: Center(child: Text('Willpower')))
+                              ],
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Card(
+                            child: Column(
+                              children: const [
+                                SizedBox(
+                                  height: 200,
+                                    child: Center(child: Text('Threat')))
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 ),
 //-----------------------------HEROES-------------------------------------------

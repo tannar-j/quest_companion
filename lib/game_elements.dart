@@ -38,7 +38,7 @@ class ThreatCounter extends StatelessWidget {
 }
 
 //------------------------------------------------------------------------------
-//------------------------------------------------------------------------------
+//---------------------------GAME FLOW------------------------------------------
 
 class GameFlow extends StatelessWidget {
   const GameFlow({Key? key}) : super(key: key);
@@ -173,6 +173,7 @@ class MainPhaseHeader extends StatelessWidget {
 
 //------------------------------------------------------------------------------
 //-------------------------QUEST CARDS------------------------------------------
+
 class QuestTracker extends StatelessWidget {
   const QuestTracker({Key? key, required this.questCounters,required this.currentCounters, required this.title}) : super(key: key);
   final int questCounters;
@@ -182,19 +183,19 @@ class QuestTracker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100,
+      height: 80,
       child: Column(
         children: [
           Center(
             child: Text(title,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 25),
+              style: const TextStyle(fontSize: 20),
             ),
           ),
           Center(
             child: Text('$currentCounters / $questCounters',
                 textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 50),
+            style: const TextStyle(fontSize: 40),
             ),
           ),
         ],
