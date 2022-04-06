@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       title: 'Quest Companion',
       theme: ThemeData(
         fontFamily: 'Ringbearer',
-        primarySwatch: Colors.grey,
+        primarySwatch: Colors.blueGrey,
       ),
       home: const DefaultTabController(
           length: 3,
