@@ -82,155 +82,183 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
 //-----------------------------QUEST--------------------------------------------
-                Column(
-                  children: [
-                    Card(
-                      child: Row(
-                        children: [
-                          IconButton(
-                              onPressed: () => setState(() {
-                                    if (_questTracker > 0) {
-                                      _questTracker--;
-                                    }
-                                  }),
-                              icon: const Icon(Icons.arrow_drop_down_sharp)),
-                          Expanded(
-                              child: QuestTracker(
-                            questCounters: _quest.progressCount,
-                            currentCounters: _questTracker,
-                            title: 'Current Quest',
-                          )),
-                          IconButton(
-                              onPressed: () => setState(() {
-                                    _questTracker++;
-                                  }),
-                              icon: const Icon(Icons.arrow_drop_up_sharp)),
-                        ],
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Card(
+                        child: Row(
+                          children: [
+                            IconButton(
+                                onPressed: () => setState(() {
+                                      if (_questTracker > 0) {
+                                        _questTracker--;
+                                      }
+                                    }),
+                                icon: const Icon(Icons.arrow_drop_down_sharp)),
+                            Expanded(
+                                child: QuestTracker(
+                              questCounters: _quest.progressCount,
+                              currentCounters: _questTracker,
+                              title: 'Current Quest',
+                            )),
+                            IconButton(
+                                onPressed: () => setState(() {
+                                      _questTracker++;
+                                    }),
+                                icon: const Icon(Icons.arrow_drop_up_sharp)),
+                          ],
+                        ),
                       ),
-                    ),
-                    Card(
-                      child: Row(
-                        children: [
-                          IconButton(
-                              onPressed: () => setState(() {
-                                    if (_locationTracker > 0) {
-                                      _locationTracker--;
-                                    }
+                      Card(
+                        child: Row(
+                          children: [
+                            Expanded(
+                                child: TextButton(
+                                  onPressed: () => setState(() {
+                                    null;
                                   }),
-                              icon: const Icon(Icons.arrow_drop_down_sharp)),
-                          Expanded(
-                              child: QuestTracker(
-                            questCounters: _location.progressCount,
-                            currentCounters: _locationTracker,
-                            title: 'Current Location',
-                          )),
-                          IconButton(
-                              onPressed: () => setState(() {
-                                    _locationTracker++;
-                                  }),
-                              icon: const Icon(Icons.arrow_drop_up_sharp)),
-                        ],
+                                  child: const Text('Complete Current Quest'),
+                                )),
+                          ],
+                        ),
                       ),
-                    ),
-                    Card(
-                      child: Row(
+                      Card(
+                        child: Row(
+                          children: [
+                            IconButton(
+                                onPressed: () => setState(() {
+                                      if (_locationTracker > 0) {
+                                        _locationTracker--;
+                                      }
+                                    }),
+                                icon: const Icon(Icons.arrow_drop_down_sharp)),
+                            Expanded(
+                                child: QuestTracker(
+                              questCounters: _location.progressCount,
+                              currentCounters: _locationTracker,
+                              title: 'Current Location',
+                            )),
+                            IconButton(
+                                onPressed: () => setState(() {
+                                      _locationTracker++;
+                                    }),
+                                icon: const Icon(Icons.arrow_drop_up_sharp)),
+                          ],
+                        ),
+                      ),
+                      Card(
+                        child: Row(
+                          children: [
+                            Expanded(
+                                child: TextButton(
+                              onPressed: () => setState(() {
+                                null;
+                              }),
+                              child: const Text('Travel to New Location'),
+                            )),
+                          ],
+                        ),
+                      ),
+                      Row(
                         children: [
                           Expanded(
-                              child: TextButton(
-                            onPressed: () => setState(() {
-                              null;
-                            }),
-                            child: const Text('Travel to New Location'),
-                          )),
-                        ],
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Card(
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                    height: 200,
-                                    child: Center(
-                                        child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        IconButton(
-                                            onPressed: () => setState(() {
-                                                  _locationTracker++;
-                                                }),
-                                            icon: const Icon(
-                                                Icons.arrow_drop_up_sharp)),
-                                        const Text('Willpower'),
-                                        Text(
-                                          _quest.willpower.toString(),
-                                          style: const TextStyle(fontSize: 45),
-                                        ),
-                                        IconButton(
-                                            onPressed: () => setState(() {
-                                                  _locationTracker++;
-                                                }),
-                                            icon: const Icon(
-                                                Icons.arrow_drop_down_sharp)),
-                                      ],
-                                    )))
-                              ],
+                            child: Card(
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                      height: 200,
+                                      child: Center(
+                                          child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          IconButton(
+                                              onPressed: () => setState(() {
+                                                    _locationTracker++;
+                                                  }),
+                                              icon: const Icon(
+                                                  Icons.arrow_drop_up_sharp)),
+                                          const Text('Willpower'),
+                                          Text(
+                                            _quest.willpower.toString(),
+                                            style: const TextStyle(fontSize: 45),
+                                          ),
+                                          IconButton(
+                                              onPressed: () => setState(() {
+                                                    _locationTracker++;
+                                                  }),
+                                              icon: const Icon(
+                                                  Icons.arrow_drop_down_sharp)),
+                                        ],
+                                      )))
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          child: Card(
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                    height: 200,
-                                    child: Center(
-                                        child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        IconButton(
-                                            onPressed: () => setState(() {
-                                                  _locationTracker++;
-                                                }),
-                                            icon: const Icon(
-                                                Icons.arrow_drop_up_sharp)),
-                                        const Text('Threat'),
-                                        Text(
-                                          _quest.threat.toString(),
-                                          style: const TextStyle(fontSize: 45),
-                                        ),
-                                        IconButton(
-                                            onPressed: () => setState(() {
-                                                  _locationTracker--;
-                                                }),
-                                            icon: const Icon(
-                                                Icons.arrow_drop_down_sharp)),
-                                      ],
-                                    )))
-                              ],
+                          Expanded(
+                            child: Card(
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                      height: 200,
+                                      child: Center(
+                                          child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          IconButton(
+                                              onPressed: () => setState(() {
+                                                    _locationTracker++;
+                                                  }),
+                                              icon: const Icon(
+                                                  Icons.arrow_drop_up_sharp)),
+                                          const Text('Threat'),
+                                          Text(
+                                            _quest.threat.toString(),
+                                            style: const TextStyle(fontSize: 45),
+                                          ),
+                                          IconButton(
+                                              onPressed: () => setState(() {
+                                                    _locationTracker--;
+                                                  }),
+                                              icon: const Icon(
+                                                  Icons.arrow_drop_down_sharp)),
+                                        ],
+                                      )))
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    Card(
-                      child: Row(
-                        children: [
-                          Expanded(
-                              child: TextButton(
-                            onPressed: () => setState(() {
-                              null;
-                            }),
-                            child: const Text('Complete Quest'),
-                          )),
                         ],
                       ),
-                    ),
-                  ],
+                      Card(
+                        child: Row(
+                          children: [
+                            Expanded(
+                                child: TextButton(
+                              onPressed: () => setState(() {
+                                null;
+                              }),
+                              child: const Text('Complete Quest'),
+                            )),
+                          ],
+                        ),
+                      ),
+                      Card(
+                        child: Row(
+                          children: [
+                            Expanded(
+                                child: TextButton(
+                                  onPressed: () => setState(() {
+                                    null;
+                                  }),
+                                  child: const Text('Increase Threat'),
+                                )),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
 //-----------------------------HEROES-------------------------------------------
                 const Text('Hero Stuff'),
