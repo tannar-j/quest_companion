@@ -9,7 +9,7 @@ Player _player4 = Player('Player 4', 0, false);
 
 QuestCards _quest = QuestCards(5, false, 0, 0);
 int _questTracker = 5;
-QuestCards _location = QuestCards(5, true, 0, 0);
+QuestCards _location = QuestCards(4, true, 0, 0);
 int _locationTracker = 0;
 
 void main() {
@@ -109,6 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ],
                         ),
                       ),
+                      if (_questTracker >= _quest.progressCount)
                       Card(
                         child: Row(
                           children: [
@@ -122,6 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ],
                         ),
                       ),
+                      if(_location.progressCount > 0)
                       Card(
                         child: Row(
                           children: [
@@ -146,6 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ],
                         ),
                       ),
+                      if(_locationTracker >= _location.progressCount)
                       Card(
                         child: Row(
                           children: [
@@ -174,7 +177,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         children: [
                                           IconButton(
                                               onPressed: () => setState(() {
-                                                    _locationTracker++;
+                                                    _quest.willpower++;
                                                   }),
                                               icon: const Icon(
                                                   Icons.arrow_drop_up_sharp)),
@@ -185,7 +188,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                           ),
                                           IconButton(
                                               onPressed: () => setState(() {
-                                                    _locationTracker++;
+                                                if(_quest.willpower > 0) {
+                                                  _quest.willpower--;
+                                                }
                                                   }),
                                               icon: const Icon(
                                                   Icons.arrow_drop_down_sharp)),
@@ -208,7 +213,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         children: [
                                           IconButton(
                                               onPressed: () => setState(() {
-                                                    _locationTracker++;
+                                                    _quest.threat++;
                                                   }),
                                               icon: const Icon(
                                                   Icons.arrow_drop_up_sharp)),
@@ -219,7 +224,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                           ),
                                           IconButton(
                                               onPressed: () => setState(() {
-                                                    _locationTracker--;
+                                                if(_quest.threat > 0) {
+                                                  _quest.threat--;
+                                                }
                                                   }),
                                               icon: const Icon(
                                                   Icons.arrow_drop_down_sharp)),
@@ -231,26 +238,42 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ],
                       ),
+                      if(_quest.willpower >= _quest.threat)
                       Card(
                         child: Row(
                           children: [
                             Expanded(
                                 child: TextButton(
                               onPressed: () => setState(() {
-                                null;
+                                int _progressTokens = _quest.willpower - _quest.threat;
+                                while(_progressTokens > 0){
+                                  if(_locationTracker < _location.progressCount){
+                                    _locationTracker++;
+                                    _progressTokens--;
+                                  }
+                                  if(_locationTracker == _location.progressCount){
+                                    _questTracker++;
+                                    _progressTokens--;
+                                  }
+                                }
                               }),
                               child: const Text('Complete Quest'),
                             )),
                           ],
                         ),
                       ),
+                      if(_quest.threat > _quest.willpower)
                       Card(
                         child: Row(
                           children: [
                             Expanded(
                                 child: TextButton(
                                   onPressed: () => setState(() {
-                                    null;
+                                   int _threatTokens = _quest.threat - _quest.willpower;
+                                    _player1.playerThreat += _threatTokens;
+                                   _player2.playerThreat += _threatTokens;
+                                   _player3.playerThreat += _threatTokens;
+                                   _player4.playerThreat += _threatTokens;
                                   }),
                                   child: const Text('Increase Threat'),
                                 )),
