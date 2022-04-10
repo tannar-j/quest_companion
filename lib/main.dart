@@ -7,9 +7,9 @@ Player _player2 = Player('Player 2', 0, false);
 Player _player3 = Player('Player 3', 0, false);
 Player _player4 = Player('Player 4', 0, false);
 
-QuestCards _quest = QuestCards(5, false);
+QuestCards _quest = QuestCards(5, false, 0, 0);
 int _questTracker = 5;
-QuestCards _location = QuestCards(5, true);
+QuestCards _location = QuestCards(5, true, 0, 0);
 int _locationTracker = 0;
 
 void main() {
@@ -150,10 +150,33 @@ class _MyHomePageState extends State<MyHomePage> {
                         Expanded(
                           child: Card(
                             child: Column(
-                              children: const [
+                              children: [
                                 SizedBox(
-                                  height: 200,
-                                    child: Center(child: Text('Willpower')))
+                                    height: 200,
+                                    child: Center(
+                                        child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        IconButton(
+                                            onPressed: () => setState(() {
+                                                  _locationTracker++;
+                                                }),
+                                            icon: const Icon(
+                                                Icons.arrow_drop_up_sharp)),
+                                        const Text('Willpower'),
+                                        Text(
+                                          _quest.willpower.toString(),
+                                          style: const TextStyle(fontSize: 45),
+                                        ),
+                                        IconButton(
+                                            onPressed: () => setState(() {
+                                                  _locationTracker++;
+                                                }),
+                                            icon: const Icon(
+                                                Icons.arrow_drop_down_sharp)),
+                                      ],
+                                    )))
                               ],
                             ),
                           ),
@@ -161,16 +184,52 @@ class _MyHomePageState extends State<MyHomePage> {
                         Expanded(
                           child: Card(
                             child: Column(
-                              children: const [
+                              children: [
                                 SizedBox(
-                                  height: 200,
-                                    child: Center(child: Text('Threat')))
+                                    height: 200,
+                                    child: Center(
+                                        child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        IconButton(
+                                            onPressed: () => setState(() {
+                                                  _locationTracker++;
+                                                }),
+                                            icon: const Icon(
+                                                Icons.arrow_drop_up_sharp)),
+                                        const Text('Threat'),
+                                        Text(
+                                          _quest.threat.toString(),
+                                          style: const TextStyle(fontSize: 45),
+                                        ),
+                                        IconButton(
+                                            onPressed: () => setState(() {
+                                                  _locationTracker--;
+                                                }),
+                                            icon: const Icon(
+                                                Icons.arrow_drop_down_sharp)),
+                                      ],
+                                    )))
                               ],
                             ),
                           ),
                         ),
                       ],
-                    )
+                    ),
+                    Card(
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: TextButton(
+                            onPressed: () => setState(() {
+                              null;
+                            }),
+                            child: const Text('Complete Quest'),
+                          )),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
 //-----------------------------HEROES-------------------------------------------

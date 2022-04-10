@@ -4,10 +4,12 @@
 //------------------------QUEST VARIABLES----------------------------------------
 
 class QuestCards {
+  int willpower;
+  int threat;
   int progressCount;
   bool isLocation;
 
-  QuestCards(this.progressCount, this.isLocation);
+  QuestCards(this.progressCount, this.isLocation, this.willpower, this.threat);
 
   increaseCount(){
       progressCount++;
