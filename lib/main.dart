@@ -47,6 +47,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,58 +119,102 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                       if (_questTracker >= _quest.progressCount)
-                      Card(
-                        child: Row(
-                          children: [
-                            Expanded(
-                                child: TextButton(
+                        Card(
+                          child: Row(
+                            children: [
+                              Expanded(
+                                  child: TextButton(
+                                    onPressed: () => showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          AlertDialog(
+                                            title:
+                                            const Text('Enter Quest Progress'),
+                                            content: Form(
+                                                child: TextField(
+                                                  key: _formKey,
+                                                  keyboardType: TextInputType.number,
+                                                  onChanged: (val) => _quest
+                                                      .progressCount = int.parse(val),
+                                                )),
+                                            actions: [
+                                              TextButton(
+                                                  onPressed: () => setState(() {
+                                                    _questTracker = 0;
+                                                    Navigator.pop(context);
+                                                  }),
+                                                  child: const Text('OK'))
+                                            ],
+                                          ),
+                                    ),
+                                    child: const Text('New Quest Card'),
+                                  ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      if (_location.progressCount > 0)
+                        Card(
+                          child: Row(
+                            children: [
+                              IconButton(
                                   onPressed: () => setState(() {
-                                    null;
-                                  }),
-                                  child: const Text('Complete Current Quest'),
-                                )),
-                          ],
+                                        if (_locationTracker > 0) {
+                                          _locationTracker--;
+                                        }
+                                      }),
+                                  icon:
+                                      const Icon(Icons.arrow_drop_down_sharp)),
+                              Expanded(
+                                  child: QuestTracker(
+                                questCounters: _location.progressCount,
+                                currentCounters: _locationTracker,
+                                title: 'Current Location',
+                              )),
+                              IconButton(
+                                  onPressed: () => setState(() {
+                                        _locationTracker++;
+                                      }),
+                                  icon: const Icon(Icons.arrow_drop_up_sharp)),
+                            ],
+                          ),
                         ),
-                      ),
-                      if(_location.progressCount > 0)
-                      Card(
-                        child: Row(
-                          children: [
-                            IconButton(
-                                onPressed: () => setState(() {
-                                      if (_locationTracker > 0) {
-                                        _locationTracker--;
-                                      }
-                                    }),
-                                icon: const Icon(Icons.arrow_drop_down_sharp)),
-                            Expanded(
-                                child: QuestTracker(
-                              questCounters: _location.progressCount,
-                              currentCounters: _locationTracker,
-                              title: 'Current Location',
-                            )),
-                            IconButton(
-                                onPressed: () => setState(() {
-                                      _locationTracker++;
-                                    }),
-                                icon: const Icon(Icons.arrow_drop_up_sharp)),
-                          ],
-                        ),
-                      ),
-                      if(_locationTracker >= _location.progressCount)
-                      Card(
-                        child: Row(
-                          children: [
-                            Expanded(
+                      if (_locationTracker >= _location.progressCount)
+                        Card(
+                          child: Row(
+                            children: [
+                              Expanded(
                                 child: TextButton(
-                              onPressed: () => setState(() {
-                                null;
-                              }),
-                              child: const Text('Travel to New Location'),
-                            )),
-                          ],
+                                  onPressed: () => showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        AlertDialog(
+                                      title:
+                                          const Text('Enter Location Progress'),
+                                      content: Form(
+                                          child: TextField(
+                                            controller: _controller,
+                                        key: _formKey,
+                                        keyboardType: TextInputType.number,
+                                        onChanged: (val) => _location
+                                            .progressCount = int.parse(val),
+                                      )),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () => setState(() {
+                                                  _locationTracker = 0;
+                                                  Navigator.pop(context);
+                                                }),
+                                            child: const Text('OK'))
+                                      ],
+                                    ),
+                                  ),
+                                  child: const Text('New Location Card'),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
                       Row(
                         children: [
                           Expanded(
@@ -184,13 +237,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                           const Text('Willpower'),
                                           Text(
                                             _quest.willpower.toString(),
-                                            style: const TextStyle(fontSize: 45),
+                                            style:
+                                                const TextStyle(fontSize: 45),
                                           ),
                                           IconButton(
                                               onPressed: () => setState(() {
-                                                if(_quest.willpower > 0) {
-                                                  _quest.willpower--;
-                                                }
+                                                    if (_quest.willpower > 0) {
+                                                      _quest.willpower--;
+                                                    }
                                                   }),
                                               icon: const Icon(
                                                   Icons.arrow_drop_down_sharp)),
@@ -220,13 +274,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                           const Text('Threat'),
                                           Text(
                                             _quest.threat.toString(),
-                                            style: const TextStyle(fontSize: 45),
+                                            style:
+                                                const TextStyle(fontSize: 45),
                                           ),
                                           IconButton(
                                               onPressed: () => setState(() {
-                                                if(_quest.threat > 0) {
-                                                  _quest.threat--;
-                                                }
+                                                    if (_quest.threat > 0) {
+                                                      _quest.threat--;
+                                                    }
                                                   }),
                                               icon: const Icon(
                                                   Icons.arrow_drop_down_sharp)),
@@ -238,48 +293,54 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ],
                       ),
-                      if(_quest.willpower >= _quest.threat)
-                      Card(
-                        child: Row(
-                          children: [
-                            Expanded(
-                                child: TextButton(
-                              onPressed: () => setState(() {
-                                int _progressTokens = _quest.willpower - _quest.threat;
-                                while(_progressTokens > 0){
-                                  if(_locationTracker < _location.progressCount){
-                                    _locationTracker++;
-                                    _progressTokens--;
+                      if (_quest.willpower >= _quest.threat)
+                        Card(
+                          child: Row(
+                            children: [
+                              Expanded(
+                                  child: TextButton(
+                                onPressed: () => setState(() {
+                                  int _progressTokens =
+                                      _quest.willpower - _quest.threat;
+                                  while (_progressTokens > 0) {
+                                    if (_locationTracker <
+                                        _location.progressCount) {
+                                      _locationTracker++;
+                                      _progressTokens--;
+                                    }
+                                    if (_locationTracker ==
+                                        _location.progressCount) {
+                                      _questTracker++;
+                                      _progressTokens--;
+                                    }
                                   }
-                                  if(_locationTracker == _location.progressCount){
-                                    _questTracker++;
-                                    _progressTokens--;
-                                  }
-                                }
-                              }),
-                              child: const Text('Complete Quest'),
-                            )),
-                          ],
+                                  _quest.willpower = 0;
+                                  _quest.threat = 0;
+                                }),
+                                child: const Text('Complete Quest'),
+                              )),
+                            ],
+                          ),
                         ),
-                      ),
-                      if(_quest.threat > _quest.willpower)
-                      Card(
-                        child: Row(
-                          children: [
-                            Expanded(
-                                child: TextButton(
-                                  onPressed: () => setState(() {
-                                   int _threatTokens = _quest.threat - _quest.willpower;
-                                    _player1.playerThreat += _threatTokens;
-                                   _player2.playerThreat += _threatTokens;
-                                   _player3.playerThreat += _threatTokens;
-                                   _player4.playerThreat += _threatTokens;
-                                  }),
-                                  child: const Text('Increase Threat'),
-                                )),
-                          ],
+                      if (_quest.threat > _quest.willpower)
+                        Card(
+                          child: Row(
+                            children: [
+                              Expanded(
+                                  child: TextButton(
+                                onPressed: () => setState(() {
+                                  int _threatTokens =
+                                      _quest.threat - _quest.willpower;
+                                  _player1.playerThreat += _threatTokens;
+                                  _player2.playerThreat += _threatTokens;
+                                  _player3.playerThreat += _threatTokens;
+                                  _player4.playerThreat += _threatTokens;
+                                }),
+                                child: const Text('Increase Threat'),
+                              )),
+                            ],
+                          ),
                         ),
-                      ),
                     ],
                   ),
                 ),
