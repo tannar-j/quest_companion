@@ -123,32 +123,49 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Row(
                             children: [
                               Expanded(
-                                  child: TextButton(
-                                    onPressed: () => showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) =>
-                                          AlertDialog(
-                                            title:
-                                            const Text('Enter Quest Progress'),
-                                            content: Form(
-                                                child: TextField(
-                                                  key: _formKey,
-                                                  keyboardType: TextInputType.number,
-                                                  onChanged: (val) => _quest
-                                                      .progressCount = int.parse(val),
-                                                )),
-                                            actions: [
-                                              TextButton(
-                                                  onPressed: () => setState(() {
-                                                    _questTracker = 0;
+                                child: TextButton(
+                                  onPressed: () => showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        AlertDialog(
+                                      title: const Text('Enter Quest Progress'),
+                                      content: Form(
+                                          key: _formKey,
+                                          child: TextFormField(
+                                            validator: (value) {
+                                              if (value == null ||
+                                                  value.isEmpty) {
+                                                return 'Enter a value';
+                                              }
+                                              int maximum = int.parse(value);
+                                              if (maximum > 20) {
+                                                return 'Value is too High!';
+                                              }
+                                              return null;
+                                            },
+                                            keyboardType: TextInputType.number,
+                                            onSaved: (value) => {
+                                              _quest.progressCount =
+                                                  int.parse(value!),
+                                              _questTracker = 0
+                                            },
+                                          )),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () => setState(() {
+                                                  if (_formKey.currentState!
+                                                      .validate()) {
+                                                    _formKey.currentState
+                                                        ?.save();
                                                     Navigator.pop(context);
-                                                  }),
-                                                  child: const Text('OK'))
-                                            ],
-                                          ),
+                                                  }
+                                                }),
+                                            child: const Text('OK'))
+                                      ],
                                     ),
-                                    child: const Text('New Quest Card'),
                                   ),
+                                  child: const Text('New Quest Card'),
+                                ),
                               ),
                             ],
                           ),
@@ -193,7 +210,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           const Text('Enter Location Progress'),
                                       content: Form(
                                           child: TextField(
-                                            controller: _controller,
+                                        controller: _controller,
                                         key: _formKey,
                                         keyboardType: TextInputType.number,
                                         onChanged: (val) => _location
