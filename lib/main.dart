@@ -95,6 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Column(
                     children: [
                       Card(
+                        color: Colors.brown[400],
                         child: Row(
                           children: [
                             IconButton(
@@ -120,6 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       if (_questTracker >= _quest.progressCount)
                         Card(
+                          color: Colors.amber,
                           child: Row(
                             children: [
                               Expanded(
@@ -160,11 +162,16 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     Navigator.pop(context);
                                                   }
                                                 }),
-                                            child: const Text('OK'))
+                                            child: const Text(
+                                              'OK',
+                                            ))
                                       ],
                                     ),
                                   ),
-                                  child: const Text('New Quest Card'),
+                                  child: const Text(
+                                    'New Quest Card',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
                                 ),
                               ),
                             ],
@@ -172,6 +179,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       if (_location.progressCount > 0)
                         Card(
+                          color: Colors.brown[400],
                           child: Row(
                             children: [
                               IconButton(
@@ -198,6 +206,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       if (_locationTracker >= _location.progressCount)
                         Card(
+                          color: Colors.amber,
                           child: Row(
                             children: [
                               Expanded(
@@ -206,8 +215,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                     context: context,
                                     builder: (BuildContext context) =>
                                         AlertDialog(
-                                      title:
-                                          const Text('Enter Location Progress'),
+                                      title: const Text(
+                                        'Enter Location Progress',
+                                      ),
                                       content: Form(
                                           child: TextField(
                                         controller: _controller,
@@ -226,7 +236,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                       ],
                                     ),
                                   ),
-                                  child: const Text('New Location Card'),
+                                  child: const Text('New Location Card',
+                                      style: TextStyle(color: Colors.black)),
                                 ),
                               ),
                             ],
@@ -236,6 +247,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: [
                           Expanded(
                             child: Card(
+                              color: Colors.lightBlueAccent,
                               child: Column(
                                 children: [
                                   SizedBox(
@@ -273,6 +285,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           Expanded(
                             child: Card(
+                              color: Colors.red[800],
                               child: Column(
                                 children: [
                                   SizedBox(
@@ -312,6 +325,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       if (_quest.willpower >= _quest.threat)
                         Card(
+                          color: Colors.amber,
                           child: Row(
                             children: [
                               Expanded(
@@ -334,13 +348,15 @@ class _MyHomePageState extends State<MyHomePage> {
                                   _quest.willpower = 0;
                                   _quest.threat = 0;
                                 }),
-                                child: const Text('Complete Quest'),
+                                child: const Text('Complete Quest',
+                                    style: TextStyle(color: Colors.black)),
                               )),
                             ],
                           ),
                         ),
                       if (_quest.threat > _quest.willpower)
                         Card(
+                          color: Colors.amber,
                           child: Row(
                             children: [
                               Expanded(
@@ -355,7 +371,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                   _quest.willpower = 0;
                                   _quest.threat = 0;
                                 }),
-                                child: const Text('Increase Threat'),
+                                child: const Text('Increase Threat',
+                                    style: TextStyle(color: Colors.black)),
                               )),
                             ],
                           ),
