@@ -352,6 +352,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                   _player2.playerThreat += _threatTokens;
                                   _player3.playerThreat += _threatTokens;
                                   _player4.playerThreat += _threatTokens;
+                                  _quest.willpower = 0;
+                                  _quest.threat = 0;
                                 }),
                                 child: const Text('Increase Threat'),
                               )),
