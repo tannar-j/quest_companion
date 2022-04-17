@@ -53,6 +53,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _controller = TextEditingController();
+  final _controller2 = TextEditingController();
 
   @override
   void dispose() {
@@ -455,21 +456,19 @@ class _MyHomePageState extends State<MyHomePage> {
                                         key: _formKey,
                                         child: Column(
                                           children: [
-                                            TextField(
+                                            TextFormField(
                                               controller: _controller,
-                                              keyboardType:
-                                                  TextInputType.number,
-                                              onChanged: (val) =>
-                                                  _location.progressCount =
-                                                      int.parse(val),
+                                              onSaved: (value) => {
+
+                                              }
                                             ),
-                                            TextField(
-                                              controller: _controller,
+                                            TextFormField(
+                                              controller: _controller2,
                                               keyboardType:
                                                   TextInputType.number,
-                                              onChanged: (val) =>
-                                                  _location.progressCount =
-                                                      int.parse(val),
+                                              onSaved: (value) => {
+
+                                              }
                                             ),
                                           ],
                                         )),
@@ -538,5 +537,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ));
   }
 }
+
 
 //------------------------------------------------------------------------------
