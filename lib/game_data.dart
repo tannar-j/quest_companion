@@ -43,3 +43,15 @@ class Player {
 
 }
 
+//------------------------------------------------------------------------------
+//-----------------------------HEROES--------------------------------------------
+class PlayerHero{
+  int heroThreat;
+  int heroHitpoints;
+  String heroName;
+  String heroSphere;
+  int heroResource;
+
+  PlayerHero(this.heroName, this.heroSphere, this.heroHitpoints, this.heroThreat, this.heroResource);
+
+}
